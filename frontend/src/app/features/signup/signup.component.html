@@ -1,0 +1,98 @@
+<div class="login-page">
+
+  <section class="hero-panel">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="hero-line">Making</p>
+      <p class="hero-line">India</p>
+      <p class="hero-line">Better</p>
+      <p class="hero-line">Everyday</p>
+    </div>
+
+  </section>
+
+  <section class="form-panel">
+
+    <div class="login-card">
+
+      <h1 class="card-title">
+        Create Account
+      </h1>
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSignup()">
+
+        <div class="field-group">
+          <label>Username</label>
+
+          <input
+            type="text"
+            formControlName="username"
+            placeholder="Enter username">
+        </div>
+
+        <div class="field-group">
+          <label>Email</label>
+
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Enter email">
+        </div>
+
+        <div class="field-group">
+          <label>Password</label>
+
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Enter password">
+        </div>
+
+        <div class="field-group">
+          <label>Confirm Password</label>
+
+          <input
+            [type]="showConfirmPassword() ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="Confirm password">
+        </div>
+
+        <div class="checkbox-group">
+          <mat-checkbox
+            formControlName="agreeContinue">
+
+            Agree & Continue
+
+          </mat-checkbox>
+        </div>
+
+        <button
+          type="submit"
+          class="login-btn"
+          mat-flat-button
+          color="primary">
+
+          Create Account
+
+        </button>
+
+        <div class="signup-link">
+
+          Already have an account?
+
+          <a routerLink="/login">
+            Sign In
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</div>

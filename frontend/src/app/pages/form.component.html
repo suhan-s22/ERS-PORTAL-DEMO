@@ -1,0 +1,605 @@
+<div class="page">
+  <div class="form-card">
+
+    <h2 class="form-title">
+      Electrical Repair Service Requisition Form
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="section-title">
+        Equipment Information
+      </div>
+
+      <div class="form-layout">
+
+        <!-- LEFT COLUMN -->
+        <div class="column">
+
+          <div class="form-group">
+            <label>Main Equipment Name <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="mainEquipmentName"
+              [class.invalid-field]="isInvalid('mainEquipmentName')">
+
+            @if (isInvalid('mainEquipmentName')) {
+              <div class="error-text">
+                {{ getErrorMessage('mainEquipmentName') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Equipment Serial No <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="equipmentSerialNo"
+              [class.invalid-field]="isInvalid('equipmentSerialNo')">
+
+            @if (isInvalid('equipmentSerialNo')) {
+              <div class="error-text">
+                {{ getErrorMessage('equipmentSerialNo') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Motor Manufacturing Year <span class="required">*</span></label>
+            <input
+              type="number"
+              formControlName="motorManufacturingYear"
+              [class.invalid-field]="isInvalid('motorManufacturingYear')">
+
+            @if (isInvalid('motorManufacturingYear')) {
+              <div class="error-text">
+                {{ getErrorMessage('motorManufacturingYear') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Application / Use <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="applicationUse"
+              [class.invalid-field]="isInvalid('applicationUse')">
+
+            @if (isInvalid('applicationUse')) {
+              <div class="error-text">
+                {{ getErrorMessage('applicationUse') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Installed Location</label>
+            <input type="text" formControlName="installedLocation">
+          </div>
+
+          <div class="form-group">
+            <label>Installed Qty <span class="required">*</span></label>
+            <input
+              type="number"
+              formControlName="installedQty"
+              [class.invalid-field]="isInvalid('installedQty')">
+
+            @if (isInvalid('installedQty')) {
+              <div class="error-text">
+                {{ getErrorMessage('installedQty') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Equipment Type <span class="required">*</span></label>
+            <select
+              formControlName="equipmentType"
+              [class.invalid-field]="isInvalid('equipmentType')">
+              <option value="">Select</option>
+
+              @for (item of equipmentTypes; track item) {
+                <option [value]="item">{{ item }}</option>
+              }
+            </select>
+
+            @if (isInvalid('equipmentType')) {
+              <div class="error-text">
+                {{ getErrorMessage('equipmentType') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Service Type <span class="required">*</span></label>
+            <select
+              formControlName="serviceType"
+              [class.invalid-field]="isInvalid('serviceType')">
+              <option value="">Select</option>
+              <option value="LT MOTOR REWINDING">LT MOTOR REWINDING</option>
+              <option value="HT MOTOR REWINDING">HT MOTOR REWINDING</option>
+              <option value="REPAIR">REPAIR</option>
+            </select>
+
+            @if (isInvalid('serviceType')) {
+              <div class="error-text">
+                {{ getErrorMessage('serviceType') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Received Date <span class="required">*</span></label>
+            <input
+              type="date"
+              formControlName="receivedDate"
+              [class.invalid-field]="isInvalid('receivedDate')">
+
+            @if (isInvalid('receivedDate')) {
+              <div class="error-text">
+                {{ getErrorMessage('receivedDate') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Warranty Status <span class="required">*</span></label>
+            <select
+              formControlName="warrantyStatus"
+              [class.invalid-field]="isInvalid('warrantyStatus')">
+              <option value="">Select</option>
+
+              @for (item of warrantyStatuses; track item) {
+                <option [value]="item">{{ item }}</option>
+              }
+            </select>
+
+            @if (isInvalid('warrantyStatus')) {
+              <div class="error-text">
+                {{ getErrorMessage('warrantyStatus') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Bearing Type <span class="required">*</span></label>
+            <select
+              formControlName="bearingType"
+              [class.invalid-field]="isInvalid('bearingType')">
+              <option value="">Select</option>
+
+              @for (item of bearingTypes; track item) {
+                <option [value]="item">{{ item }}</option>
+              }
+            </select>
+
+            @if (isInvalid('bearingType')) {
+              <div class="error-text">
+                {{ getErrorMessage('bearingType') }}
+              </div>
+            }
+          </div>
+
+        </div>
+
+        <!-- CENTER COLUMN -->
+        <div class="column">
+
+          <div class="form-group">
+            <label>Make <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="make"
+              [class.invalid-field]="isInvalid('make')">
+
+            @if (isInvalid('make')) {
+              <div class="error-text">
+                {{ getErrorMessage('make') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Model</label>
+            <input type="text" formControlName="model">
+          </div>
+
+          <div class="form-group">
+            <label>kW</label>
+            <input type="text" formControlName="kw">
+          </div>
+
+          <div class="form-group">
+            <label>Frame <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="frame"
+              [class.invalid-field]="isInvalid('frame')">
+
+            @if (isInvalid('frame')) {
+              <div class="error-text">
+                {{ getErrorMessage('frame') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Size</label>
+            <input type="text" formControlName="size">
+          </div>
+
+          <div class="form-group">
+            <label>RPM</label>
+            <input type="text" formControlName="rpm">
+          </div>
+
+          <div class="form-group">
+            <label>KVA</label>
+            <input type="text" formControlName="kva">
+          </div>
+
+          <div class="form-group">
+            <label>Voltage</label>
+            <input type="text" formControlName="voltage">
+          </div>
+
+          <div class="form-group">
+            <label>Duty Cycle</label>
+            <input type="text" formControlName="dutyCycle">
+          </div>
+
+          <div class="form-group">
+            <label>Current</label>
+            <input type="text" formControlName="current">
+          </div>
+
+          <div class="form-group">
+            <label>Received Time <span class="required">*</span></label>
+            <input
+              type="time"
+              formControlName="receivedTime"
+              [class.invalid-field]="isInvalid('receivedTime')">
+
+            @if (isInvalid('receivedTime')) {
+              <div class="error-text">
+                {{ getErrorMessage('receivedTime') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Previous Refurbishment No</label>
+            <input type="text" formControlName="previousRefurbishmentNo">
+          </div>
+
+          <div class="form-group">
+            <label>Spares Details</label>
+            <input type="text" formControlName="sparesDetails">
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="column">
+
+          <h3>User Department Details</h3>
+
+          <div class="form-group">
+            <label>Department</label>
+            <input type="text" formControlName="department">
+          </div>
+
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" formControlName="location">
+          </div>
+
+          <div class="form-group">
+            <label>SPOC Name <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="spocName"
+              [class.invalid-field]="isInvalid('spocName')">
+
+            @if (isInvalid('spocName')) {
+              <div class="error-text">
+                {{ getErrorMessage('spocName') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>SPOC Email <span class="required">*</span></label>
+            <input
+              type="email"
+              formControlName="spocEmail"
+              [class.invalid-field]="isInvalid('spocEmail')">
+
+            @if (isInvalid('spocEmail')) {
+              <div class="error-text">
+                {{ getErrorMessage('spocEmail') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>SPOC Contact <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="spocContact"
+              [class.invalid-field]="isInvalid('spocContact')">
+
+            @if (isInvalid('spocContact')) {
+              <div class="error-text">
+                {{ getErrorMessage('spocContact') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Electrical Head Name <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="electricalHeadName"
+              [class.invalid-field]="isInvalid('electricalHeadName')">
+
+            @if (isInvalid('electricalHeadName')) {
+              <div class="error-text">
+                {{ getErrorMessage('electricalHeadName') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Electrical Head Email <span class="required">*</span></label>
+            <input
+              type="email"
+              formControlName="electricalHeadEmail"
+              [class.invalid-field]="isInvalid('electricalHeadEmail')">
+
+            @if (isInvalid('electricalHeadEmail')) {
+              <div class="error-text">
+                {{ getErrorMessage('electricalHeadEmail') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>HOD Name <span class="required">*</span></label>
+            <input
+              type="text"
+              formControlName="hodName"
+              [class.invalid-field]="isInvalid('hodName')">
+
+            @if (isInvalid('hodName')) {
+              <div class="error-text">
+                {{ getErrorMessage('hodName') }}
+              </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>HOD Email <span class="required">*</span></label>
+            <input
+              type="email"
+              formControlName="hodEmail"
+              [class.invalid-field]="isInvalid('hodEmail')">
+
+            @if (isInvalid('hodEmail')) {
+              <div class="error-text">
+                {{ getErrorMessage('hodEmail') }}
+              </div>
+            }
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="section-title">
+        Repair Analysis / Observation
+      </div>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+          <label>
+            Defects Observed
+            <span class="required">*</span>
+          </label>
+
+          <textarea
+            formControlName="defectsObserved"
+            [class.invalid-field]="isInvalid('defectsObserved')">
+          </textarea>
+
+          @if (isInvalid('defectsObserved')) {
+            <div class="error-text">
+              {{ getErrorMessage('defectsObserved') }}
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>
+            Repairs Required
+            <span class="required">*</span>
+          </label>
+
+          <textarea
+            formControlName="repairsRequired"
+            [class.invalid-field]="isInvalid('repairsRequired')">
+          </textarea>
+
+          @if (isInvalid('repairsRequired')) {
+            <div class="error-text">
+              {{ getErrorMessage('repairsRequired') }}
+            </div>
+          }
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label>
+          Reason Of Failure
+          <span class="required">*</span>
+        </label>
+
+        <select
+          formControlName="reasonOfFailure"
+          [class.invalid-field]="isInvalid('reasonOfFailure')">
+
+          <option value="">Select</option>
+
+          @for (item of failureReasons; track item) {
+            <option [value]="item">
+              {{ item }}
+            </option>
+          }
+
+        </select>
+
+        @if (isInvalid('reasonOfFailure')) {
+          <div class="error-text">
+            {{ getErrorMessage('reasonOfFailure') }}
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Upload Supporting Files
+        </label>
+
+        <input type="file">
+
+      </div>
+
+      <div class="section-title">
+        SAP Details
+      </div>
+
+      <div class="grid-4">
+
+        <div class="form-group">
+          <label>SAP Material Code *</label>
+          <input
+            type="text"
+            formControlName="sapMaterialCode"
+            [class.invalid-field]="isInvalid('sapMaterialCode')">
+
+          @if (isInvalid('sapMaterialCode')) {
+            <div class="error-text">
+              {{ getErrorMessage('sapMaterialCode') }}
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>SAP Equipment No *</label>
+          <input
+            type="text"
+            formControlName="sapEquipmentNo"
+            [class.invalid-field]="isInvalid('sapEquipmentNo')">
+
+          @if (isInvalid('sapEquipmentNo')) {
+            <div class="error-text">
+              {{ getErrorMessage('sapEquipmentNo') }}
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>SAP Refurbishment Order No *</label>
+          <input
+            type="text"
+            formControlName="sapRefurbishmentOrderNo"
+            [class.invalid-field]="isInvalid('sapRefurbishmentOrderNo')">
+
+          @if (isInvalid('sapRefurbishmentOrderNo')) {
+            <div class="error-text">
+              {{ getErrorMessage('sapRefurbishmentOrderNo') }}
+            </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>SAP Fund Center *</label>
+          <input
+            type="text"
+            formControlName="sapFundCenter"
+            [class.invalid-field]="isInvalid('sapFundCenter')">
+
+          @if (isInvalid('sapFundCenter')) {
+            <div class="error-text">
+              {{ getErrorMessage('sapFundCenter') }}
+            </div>
+          }
+        </div>
+
+      </div>
+
+      <div class="submit-section">
+
+        <button
+          class="submit-btn"
+          type="submit">
+
+          Submit Requisition
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+@if (showSuccessModal) {
+<div class="modal-overlay">
+  <div class="success-modal">
+
+    <div class="modal-message">
+      Requisition Created Successfully.
+      ID : {{ generatedReqId }}
+    </div>
+
+    <div class="modal-buttons">
+      <button
+        class="ok-btn"
+        (click)="confirmSuccess()">
+        OK
+      </button>
+
+      <button
+        class="cancel-btn"
+        (click)="showSuccessModal = false">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+</div>
+}
+
+@if (showErrorModal) {
+<div class="modal-overlay">
+  <div class="success-modal">
+
+    <div class="modal-message">
+      Please complete all mandatory fields correctly.
+    </div>
+
+    <div class="modal-buttons">
+      <button
+        class="ok-btn"
+        (click)="closeErrorModal()">
+        OK
+      </button>
+    </div>
+
+  </div>
+</div>
+}

@@ -1,0 +1,246 @@
+<div class="view-container">
+
+  <div class="page-header">
+
+    <h2>View</h2>
+
+    <div class="header-actions">
+
+      <button
+        class="export-btn"
+        (click)="exportCsv()">
+        Export
+      </button>
+
+      <button
+        class="settings-btn"
+        (click)="openSettings()">
+        ⚙
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="table-wrapper">
+
+    <table>
+        @if (showSettings) {
+
+<div class="modal-backdrop">
+
+  <div class="settings-modal">
+
+    <h3>Personalize Columns</h3>
+
+    <div class="modal-content">
+
+      <div>
+        <label>Available Columns</label>
+
+        <select multiple size="10">
+
+          @for (column of availableColumns; track column) {
+            <option>{{ column }}</option>
+          }
+
+        </select>
+
+      </div>
+
+      <div class="move-buttons">
+        <button>&gt;</button>
+        <button>&lt;</button>
+      </div>
+
+      <div>
+        <label>Visible Columns</label>
+
+        <select multiple size="10">
+
+          @for (column of availableColumns; track column) {
+            <option>{{ column }}</option>
+          }
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button class="apply-btn">
+        Apply Changes
+      </button>
+
+      <button
+        class="cancel-btn"
+        (click)="closeSettings()">
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+}
+
+      <thead>
+
+        <tr>
+          <th>Refurbishment ID</th>
+          <th>Allotment</th>
+          <th>Main Equipment Name</th>
+          <th>Serial No</th>
+          <th>Mfg Year</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>KW</th>
+          <th>Frame</th>
+          <th>RPM</th>
+        </tr>
+
+        <tr class="filter-row">
+
+          <th>
+            <div class="advanced-filter">
+
+              <select [(ngModel)]="idOperator">
+                <option value="contains">Contains</option>
+                <option value="notContains">Does not contain</option>
+                <option value="equals">Equals</option>
+                <option value="notEquals">Does not equal</option>
+                <option value="beginsWith">Begins with</option>
+                <option value="endsWith">Ends with</option>
+                <option value="blank">Blank</option>
+                <option value="notBlank">Not blank</option>
+              </select>
+
+              <input
+                type="text"
+                placeholder="Filter..."
+                [(ngModel)]="idFilter">
+
+            </div>
+          </th>
+
+          <th></th>
+
+          <th>
+            <div class="advanced-filter">
+
+              <select [(ngModel)]="equipmentOperator">
+                <option value="contains">Contains</option>
+                <option value="notContains">Does not contain</option>
+                <option value="equals">Equals</option>
+                <option value="notEquals">Does not equal</option>
+                <option value="beginsWith">Begins with</option>
+                <option value="endsWith">Ends with</option>
+                <option value="blank">Blank</option>
+                <option value="notBlank">Not blank</option>
+              </select>
+
+              <input
+                type="text"
+                placeholder="Filter..."
+                [(ngModel)]="equipmentFilter">
+
+            </div>
+          </th>
+
+          <th>
+            <div class="advanced-filter">
+
+              <select [(ngModel)]="serialOperator">
+                <option value="contains">Contains</option>
+                <option value="notContains">Does not contain</option>
+                <option value="equals">Equals</option>
+                <option value="notEquals">Does not equal</option>
+                <option value="beginsWith">Begins with</option>
+                <option value="endsWith">Ends with</option>
+                <option value="blank">Blank</option>
+                <option value="notBlank">Not blank</option>
+              </select>
+
+              <input
+                type="text"
+                placeholder="Filter..."
+                [(ngModel)]="serialFilter">
+
+            </div>
+          </th>
+
+          <th></th>
+
+          <th>
+            <div class="advanced-filter">
+
+              <select [(ngModel)]="makeOperator">
+                <option value="contains">Contains</option>
+                <option value="notContains">Does not contain</option>
+                <option value="equals">Equals</option>
+                <option value="notEquals">Does not equal</option>
+                <option value="beginsWith">Begins with</option>
+                <option value="endsWith">Ends with</option>
+                <option value="blank">Blank</option>
+                <option value="notBlank">Not blank</option>
+              </select>
+
+              <input
+                type="text"
+                placeholder="Filter..."
+                [(ngModel)]="makeFilter">
+
+            </div>
+          </th>
+
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (row of filteredRows; track row.refurbishmentId) {
+
+          <tr>
+
+            <td>{{ row.refurbishmentId }}</td>
+
+            <td>
+
+              <button
+                class="eye-btn"
+                (click)="viewAllotment(row.refurbishmentId)">
+                👁
+              </button>
+
+            </td>
+
+            <td>{{ row.equipmentName }}</td>
+            <td>{{ row.serialNo }}</td>
+            <td>{{ row.mfgYear }}</td>
+            <td>{{ row.make }}</td>
+            <td>{{ row.model }}</td>
+            <td>{{ row.kw }}</td>
+            <td>{{ row.frame }}</td>
+            <td>{{ row.rpm }}</td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
