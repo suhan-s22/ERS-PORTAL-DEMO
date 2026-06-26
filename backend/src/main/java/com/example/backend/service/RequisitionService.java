@@ -77,6 +77,18 @@ return new ApiResponse(
 );
     }
 
+    public java.util.List<Requisition> getAllRequisitions() {
+
+    return requisitionRepository.findAll();
+
+}
+
+public Requisition getRequisitionById(Long id) {
+
+    return requisitionRepository.findById(id).orElse(null);
+
+}
+
     private String generateRequisitionId() {
 
         Random random = new Random();

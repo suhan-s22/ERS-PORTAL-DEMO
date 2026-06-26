@@ -5,6 +5,8 @@ import com.example.backend.dto.RequisitionRequest;
 import com.example.backend.service.RequisitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.backend.entity.Requisition;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/requisition")
@@ -20,5 +22,19 @@ public class RequisitionController {
         return requisitionService.createRequisition(request);
 
     }
+
+    @GetMapping
+public List<Requisition> getAllRequisitions() {
+
+    return requisitionService.getAllRequisitions();
+
+}
+
+@GetMapping("/{id}")
+public Requisition getRequisitionById(@PathVariable Long id) {
+
+    return requisitionService.getRequisitionById(id);
+
+}
 
 }

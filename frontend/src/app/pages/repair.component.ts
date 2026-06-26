@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { RequisitionService } from '../services/requisition.service';
+import { Requisition } from '../models/requisition';
 
 @Component({
   selector: 'app-repair',
@@ -8,9 +11,37 @@ import { CommonModule } from '@angular/common';
   templateUrl: './repair.component.html',
   styleUrls: ['./repair.component.css']
 })
-export class RepairComponent {
+export class RepairComponent implements OnInit{
+
+  private route = inject(ActivatedRoute);
+
+private requisitionService = inject(RequisitionService);
+
+requisition?: Requisition;
 
   showJobPopup = false;
+
+  ngOnInit(): void {
+
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+
+  this.requisitionService.getRequisitionById(id).subscribe({
+
+    next: (data) => {
+
+      this.requisition = data;
+
+    },
+
+    error: (err) => {
+
+      console.error(err);
+
+    }
+
+  });
+
+}
 
   generateJobNo(): void {
     this.showJobPopup = true;

@@ -14,32 +14,32 @@
 
           <div class="field">
             <label>Equipment Name</label>
-            <input value="LT Motor" readonly>
+            <input [value]="requisition?.mainEquipmentName" readonly>
           </div>
 
           <div class="field">
             <label>Equipment Number</label>
-            <input value="EQ1020" readonly>
+            <input [value]="requisition?.requisitionId" readonly>
           </div>
 
           <div class="field">
             <label>Serial Number</label>
-            <input value="SER1020" readonly>
+            <input [value]="requisition?.equipmentSerialNo" readonly>
           </div>
 
           <div class="field">
             <label>Make</label>
-            <input value="ABB" readonly>
+            <input [value]="requisition?.make" readonly>
           </div>
 
           <div class="field">
             <label>Model</label>
-            <input value="M20" readonly>
+            <input [value]="requisition?.model" readonly>
           </div>
 
           <div class="field">
             <label>Rating</label>
-            <input value="55 KW" readonly>
+            <input [value]="requisition?.kw" readonly>
           </div>
 
         </div>
@@ -54,22 +54,22 @@
 
           <div class="field">
             <label>Department</label>
-            <input value="Steel Melt Shop" readonly>
+            <input [value]="requisition?.department" readonly>
           </div>
 
           <div class="field">
             <label>Contact Person</label>
-            <input value="Rahul Sharma" readonly>
+            <input [value]="requisition?.spocName" readonly>
           </div>
 
           <div class="field">
             <label>Phone Number</label>
-            <input value="9876543210" readonly>
+            <input [value]="requisition?.spocContact" readonly>
           </div>
 
           <div class="field">
             <label>Location</label>
-            <input value="Plant 1" readonly>
+            <input [value]="requisition?.location" readonly>
           </div>
 
         </div>
@@ -84,12 +84,12 @@
 
           <div class="field">
             <label>Failure Type</label>
-            <input value="Electrical Failure" readonly>
+            <input [value]="requisition?.repairsRequired" readonly>
           </div>
 
           <div class="field">
             <label>Reason Of Failure</label>
-            <input value="Short Circuit" readonly>
+            <input [value]="requisition?.reasonOfFailure" readonly>
           </div>
 
         </div>
@@ -97,9 +97,7 @@
         <div class="field">
           <label>Observation</label>
 
-          <textarea readonly>
-Motor winding damaged during operation. Repair required.
-          </textarea>
+          <textarea readonly>{{ requisition?.defectsObserved }}</textarea>
         </div>
 
         <div class="field">
@@ -117,22 +115,22 @@ Motor winding damaged during operation. Repair required.
 
           <div class="field">
             <label>SAP Material Code</label>
-            <input value="NA" readonly>
+            <input [value]="requisition?.sapMaterialCode" readonly>
           </div>
 
           <div class="field">
             <label>SAP Equipment No</label>
-            <input value="NA" readonly>
+            <input [value]="requisition?.sapEquipmentNo" readonly>
           </div>
 
           <div class="field">
             <label>SAP Refurbishment Order No</label>
-            <input value="NA" readonly>
+            <input [value]="requisition?.sapRefurbishmentOrderNo" readonly>
           </div>
 
           <div class="field">
             <label>SAP Fund Center</label>
-            <input value="NA" readonly>
+            <input [value]="requisition?.sapFundCenter" readonly>
           </div>
 
         </div>

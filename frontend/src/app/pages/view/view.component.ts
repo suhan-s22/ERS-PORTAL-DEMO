@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RequisitionService } from '../../services/requisition.service';
+import { Requisition } from '../../models/requisition';
+import { Router } from '@angular/router';
 
 interface ViewRecord {
   refurbishmentId: number;
@@ -21,9 +24,11 @@ interface ViewRecord {
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent {
+export class ViewComponent implements OnInit {
 
   rows: ViewRecord[] = [];
+  private requisitionService = inject(RequisitionService);
+  private router = inject(Router);
 
   idFilter = '';
   equipmentFilter = '';
@@ -82,32 +87,47 @@ makeOperator = 'contains';
 }
 
   constructor() {
+}
 
-    const makes = [
-      'ABB',
-      'Siemens',
-      'Crompton',
-      'Kirloskar',
-      'BHEL'
-    ];
+ngOnInit(): void {
 
-    for (let i = 20; i <= 49; i++) {
+  this.requisitionService.getAllRequisitions().subscribe({
 
-      this.rows.push({
-        refurbishmentId: i,
-        equipmentName: 'Motor',
-        serialNo: `EQ${1000 + i}`,
-        mfgYear: 2018 + (i % 6),
-        make: makes[i % makes.length],
-        model: `M-${i}`,
-        kw: `${50 + i}`,
-        frame: `${100 + i}`,
-        rpm: `${1450 + i}`
-      });
+    next: (data: Requisition[]) => {
+
+      this.rows = data.map(item => ({
+
+        refurbishmentId: item.id,
+
+        equipmentName: item.mainEquipmentName,
+
+        serialNo: item.equipmentSerialNo,
+
+        mfgYear: Number(item.motorManufacturingYear),
+
+        make: item.make,
+
+        model: item.model,
+
+        kw: item.kw,
+
+        frame: item.frame,
+
+        rpm: item.rpm
+
+      }));
+
+    },
+
+    error: (error) => {
+
+      console.error('Error loading requisitions:', error);
 
     }
 
-  }
+  });
+
+}
 
   get filteredRows(): ViewRecord[] {
 
@@ -203,13 +223,61 @@ closeSettings(): void {
   this.showSettings = false;
 }
 
+applyChanges(): void {
+
+  this.showSettings = false;
+
+}
+
   viewAllotment(id: number): void {
-    alert(`Opening Equipment Details for ID ${id}`);
+
+  this.router.navigate(['/repair', id]);
+
+}
+
+  moveToVisible(): void {
+
+  if (!this.selectedAvailableColumn) {
+    return;
   }
+
+  this.availableColumns = this.availableColumns.filter(
+    column => column !== this.selectedAvailableColumn
+  );
+
+  this.visibleColumns.push(this.selectedAvailableColumn);
+
+  this.selectedAvailableColumn = '';
+
+}
+
+moveToAvailable(): void {
+
+  if (!this.selectedVisibleColumn) {
+    return;
+  }
+
+  this.visibleColumns = this.visibleColumns.filter(
+    column => column !== this.selectedVisibleColumn
+  );
+
+  this.availableColumns.push(this.selectedVisibleColumn);
+
+  this.selectedVisibleColumn = '';
+
+}
 
   showSettings = false;
 
-availableColumns = [
+  isColumnVisible(column: string): boolean {
+
+  return this.visibleColumns.includes(column);
+
+}
+
+availableColumns: string[] = [];
+
+visibleColumns: string[] = [
   'Refurbishment ID',
   'Allotment',
   'Main Equipment Name',
@@ -221,6 +289,10 @@ availableColumns = [
   'Frame',
   'RPM'
 ];
+
+selectedAvailableColumn = '';
+
+selectedVisibleColumn = '';
 
 }
 

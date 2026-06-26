@@ -38,31 +38,39 @@
       <div>
         <label>Available Columns</label>
 
-        <select multiple size="10">
+        <select
+  size="10"
+  [(ngModel)]="selectedAvailableColumn">
 
-          @for (column of availableColumns; track column) {
-            <option>{{ column }}</option>
-          }
+  @for (column of availableColumns; track column) {
+    <option [value]="column">
+      {{ column }}
+    </option>
+  }
 
-        </select>
+</select>
 
       </div>
 
       <div class="move-buttons">
-        <button>&gt;</button>
-        <button>&lt;</button>
+        <button (click)="moveToVisible()">&gt;</button>
+<button (click)="moveToAvailable()">&lt;</button>
       </div>
 
       <div>
         <label>Visible Columns</label>
 
-        <select multiple size="10">
+        <select
+  size="10"
+  [(ngModel)]="selectedVisibleColumn">
 
-          @for (column of availableColumns; track column) {
-            <option>{{ column }}</option>
-          }
+  @for (column of visibleColumns; track column) {
+    <option [value]="column">
+      {{ column }}
+    </option>
+  }
 
-        </select>
+</select>
 
       </div>
 
@@ -70,9 +78,11 @@
 
     <div class="modal-footer">
 
-      <button class="apply-btn">
-        Apply Changes
-      </button>
+      <button
+  class="apply-btn"
+  (click)="applyChanges()">
+  Apply Changes
+</button>
 
       <button
         class="cancel-btn"
@@ -91,16 +101,36 @@
       <thead>
 
         <tr>
-          <th>Refurbishment ID</th>
-          <th>Allotment</th>
-          <th>Main Equipment Name</th>
-          <th>Serial No</th>
-          <th>Mfg Year</th>
-          <th>Make</th>
-          <th>Model</th>
-          <th>KW</th>
-          <th>Frame</th>
-          <th>RPM</th>
+          @if (isColumnVisible('Refurbishment ID')) {
+  <th>Refurbishment ID</th>
+}
+          @if (isColumnVisible('Allotment')) {
+  <th>Allotment</th>
+}
+          @if (isColumnVisible('Main Equipment Name')) {
+  <th>Main Equipment Name</th>
+}
+          @if (isColumnVisible('Serial No')) {
+  <th>Serial No</th>
+}
+          @if (isColumnVisible('Mfg Year')) {
+  <th>Mfg Year</th>
+}
+          @if (isColumnVisible('Make')) {
+  <th>Make</th>
+}
+          @if (isColumnVisible('Model')) {
+  <th>Model</th>
+}
+          @if (isColumnVisible('KW')) {
+  <th>KW</th>
+}
+          @if (isColumnVisible('Frame')) {
+  <th>Frame</th>
+}
+          @if (isColumnVisible('RPM')) {
+  <th>RPM</th>
+}
         </tr>
 
         <tr class="filter-row">
@@ -212,26 +242,46 @@
 
           <tr>
 
-            <td>{{ row.refurbishmentId }}</td>
+            @if (isColumnVisible('Refurbishment ID')) {
+  <td>{{ row.refurbishmentId }}</td>
+}
 
-            <td>
+            @if (isColumnVisible('Allotment')) {
+  <td>
 
-              <button
-                class="eye-btn"
-                (click)="viewAllotment(row.refurbishmentId)">
-                👁
-              </button>
+    <button
+      class="eye-btn"
+      (click)="viewAllotment(row.refurbishmentId)">
+      👁
+    </button>
 
-            </td>
+  </td>
+}
 
-            <td>{{ row.equipmentName }}</td>
-            <td>{{ row.serialNo }}</td>
-            <td>{{ row.mfgYear }}</td>
-            <td>{{ row.make }}</td>
-            <td>{{ row.model }}</td>
-            <td>{{ row.kw }}</td>
-            <td>{{ row.frame }}</td>
-            <td>{{ row.rpm }}</td>
+            @if (isColumnVisible('Main Equipment Name')) {
+  <td>{{ row.equipmentName }}</td>
+}
+            @if (isColumnVisible('Serial No')) {
+  <td>{{ row.serialNo }}</td>
+}
+            @if (isColumnVisible('Mfg Year')) {
+  <td>{{ row.mfgYear }}</td>
+}
+            @if (isColumnVisible('Make')) {
+  <td>{{ row.make }}</td>
+}
+            @if (isColumnVisible('Model')) {
+  <td>{{ row.model }}</td>
+}
+            @if (isColumnVisible('KW')) {
+  <td>{{ row.kw }}</td>
+}
+            @if (isColumnVisible('Frame')) {
+  <td>{{ row.frame }}</td>
+}
+            @if (isColumnVisible('RPM')) {
+  <td>{{ row.rpm }}</td>
+}
 
           </tr>
 
