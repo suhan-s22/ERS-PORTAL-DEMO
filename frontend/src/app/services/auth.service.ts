@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SignupRequest } from '../models/signup-request';
 import { ApiResponse } from '../models/api-response';
+import { LoginRequest } from '../models/login-request';
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +30,12 @@ export class AuthService {
   signup(user: SignupRequest): Observable<ApiResponse> {
   return this.http.post<ApiResponse>(`${this.apiUrl}/signup`, user);
 }
+
+loginUser(loginRequest: LoginRequest) {
+  return this.http.post<ApiResponse>(
+    `${this.apiUrl}/login`,
+    loginRequest
+  );
 }
+}
+ 

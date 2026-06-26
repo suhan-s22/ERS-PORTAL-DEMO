@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.dto.ApiResponse;
+import com.example.backend.dto.LoginRequest;
 import com.example.backend.dto.SignupRequest;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
@@ -35,5 +36,19 @@ public class AuthService {
 
         return new ApiResponse(true, "Account created successfully");
     }
+
+    public ApiResponse login(LoginRequest request) {
+
+    if (userRepository.findByUsernameAndPassword(
+            request.getUsername(),
+            request.getPassword()
+    ).isPresent()) {
+
+        return new ApiResponse(true, "Login successful");
+    }
+
+    return new ApiResponse(false, "Invalid username or password");
+
+}
 
 }

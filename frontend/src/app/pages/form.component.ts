@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 
 import { DataService } from '../services/data.service';
+import { RequisitionService } from '../services/requisition.service';
 
 @Component({
   selector: 'app-form',
@@ -21,6 +22,7 @@ export class FormComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private dataService = inject(DataService);
+  private requisitionService = inject(RequisitionService);
 
   showSuccessModal = false;
   showErrorModal = false;
@@ -158,24 +160,40 @@ export class FormComponent {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    this.showErrorModal = true;
+    return;
+  }
+
+  this.requisitionService.createRequisition(this.form.value).subscribe({
+
+    next: (response) => {
+
+      if (response.success) {
+
+    this.generatedReqId = response.requisitionId ?? '';
+
+    this.showSuccessModal = true;
+
+} else {
+
+    this.showErrorModal = true;
+
+}
+
+    },
+
+    error: () => {
 
       this.showErrorModal = true;
-      return;
+
     }
 
-    const requisitionId =
-      'REQ-' + Math.floor(10000 + Math.random() * 90000);
+  });
 
-    this.dataService.addForm({
-      id: requisitionId,
-      ...this.form.value,
-    });
-
-    this.generatedReqId = requisitionId;
-    this.showSuccessModal = true;
-  }
+}
 
   closeErrorModal(): void {
     this.showErrorModal = false;

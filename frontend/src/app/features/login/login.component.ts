@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { LoginFailedDialogComponent } from './login-failed-dialog.component';
 import { RouterLink } from '@angular/router';
+import { LoginRequest } from '../../models/login-request';
 
 const CAPTCHA_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
 
@@ -79,8 +80,42 @@ export class LoginComponent {
       return;
     }
 
-    this.authService.login();
-    this.router.navigate(['/form']);
+    const loginRequest: LoginRequest = {
+  username: this.form.getRawValue().username,
+  password: this.form.getRawValue().password
+};
+
+this.authService.loginUser(loginRequest).subscribe({
+
+  next: (response) => {
+
+    if (response.success) {
+
+      this.authService.login();
+
+      this.router.navigate(['/form']);
+
+    } else {
+
+      this.dialog.open(LoginFailedDialogComponent, {
+        width: '400px',
+        autoFocus: true,
+      });
+
+    }
+
+  },
+
+  error: () => {
+
+    this.dialog.open(LoginFailedDialogComponent, {
+      width: '400px',
+      autoFocus: true,
+    });
+
+  }
+
+});
   }
 
   private captchaMatchValidator(control: AbstractControl): ValidationErrors | null {

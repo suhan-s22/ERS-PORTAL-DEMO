@@ -4,6 +4,7 @@ public class ApiResponse {
 
     private boolean success;
     private String message;
+    private String requisitionId;
 
     public ApiResponse() {
     }
@@ -11,6 +12,12 @@ public class ApiResponse {
     public ApiResponse(boolean success, String message) {
         this.success = success;
         this.message = message;
+    }
+
+    public ApiResponse(boolean success, String message, String requisitionId) {
+        this.success = success;
+        this.message = message;
+        this.requisitionId = requisitionId;
     }
 
     public boolean isSuccess() {
@@ -27,5 +34,13 @@ public class ApiResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getRequisitionId() {
+        return requisitionId;
+    }
+
+    public void setRequisitionId(String requisitionId) {
+        this.requisitionId = requisitionId;
     }
 }
